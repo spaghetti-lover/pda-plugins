@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /home/ducanh/Project/stock-filter/backend/crawler && python test_crawler.py 2>&1)",
+      "Bash(cd /home/ducanh/Project/stock-filter/backend/crawler && python -c \"from vnstock import Vnstock; s = Vnstock\\(\\).stock\\(symbol='VN30F1M', source='VCI'\\); print\\(s.listing.all_symbols\\(\\).head\\(\\)\\)\" 2>&1)",
+      "Bash(python test_crawler.py 2>&1)",
+      "Bash(python -c \"\nfrom vnstock import Vnstock\ns = Vnstock\\(\\).stock\\(symbol='VN30F1M', source='VCI'\\)\ndf = s.listing.all_symbols\\(\\)\nprint\\(df.columns.tolist\\(\\)\\)\nprint\\(df.head\\(3\\)\\)\n\" 2>&1)",
+      "Bash(python -c \"from infrastructure.stock_repository_impl import StockRepositoryImpl; from application.use_case.get_stock import GetStockUseCase; uc = GetStockUseCase\\(StockRepositoryImpl\\(\\)\\); print\\(uc.execute\\(exchanges={''''HOSE''''}, min_gtgd=0\\)\\)\")",
+      "Bash(python -c \"import vnstock; help\\(vnstock.Vnstock.__init__\\)\")",
+      "Bash(python3 -c \"import traceback; help\\(traceback.StackSummary\\)\" 2>/dev/null | head -60)",
+      "Bash(python3 -c \"import traceback; help\\(traceback.TracebackException\\)\" 2>/dev/null | head -80)",
+      "Bash(python3 -c \"import logging; help\\(logging.Formatter.formatException\\)\" 2>/dev/null | head -30)",
+      "Bash(python3 -c \"\nimport logging\nimport inspect\nsrc = inspect.getsource\\(logging.Formatter.formatException\\)\nprint\\(src\\)\nprint\\('---'\\)\nsrc2 = inspect.getsource\\(logging.Formatter.format\\)\nprint\\(src2\\)\n\")",
+      "Bash(cd /home/ducanh/Project/stock-filter/backend && python -B -c \"\nfrom logger import setup_logging, get_logger\nsetup_logging\\(error_log_file='errors.log'\\)\nlog = get_logger\\('test'\\)\ntry:\n    raise ValueError\\('test error'\\)\nexcept Exception:\n    log.error\\('something failed', exc_info=True\\)\n\nwith open\\('errors.log'\\) as f:\n    print\\(f.read\\(\\)\\)\n\")",
+      "Bash(python -B -c \"\nfrom logger import setup_logging, get_logger\nsetup_logging\\(error_log_file='errors.log'\\)\nlog = get_logger\\('test'\\)\ntry:\n    raise ValueError\\('test error'\\)\nexcept Exception:\n    log.error\\('something failed', exc_info=True\\)\n\nwith open\\('errors.log'\\) as f:\n    print\\(f.read\\(\\)\\)\n\")",
+      "Bash(python -B -c \"\nimport os; os.remove\\('errors.log'\\) if os.path.exists\\('errors.log'\\) else None\nfrom logger import setup_logging, get_logger\nsetup_logging\\(error_log_file='errors.log'\\)\nlog = get_logger\\('test'\\)\ntry:\n    raise ValueError\\('first error'\\)\nexcept BaseException:\n    log.error\\('something failed', exc_info=True\\)\ntry:\n    raise RuntimeError\\('second error'\\)\nexcept BaseException:\n    log.error\\('another failure', exc_info=True\\)\n\nwith open\\('errors.log'\\) as f:\n    print\\(f.read\\(\\)\\)\n\")",
+      "Bash(python -B -c \"\nfrom vnstock import Vnstock\ns = Vnstock\\(\\).stock\\(symbol='ACB', source='VCI'\\)\nprint\\(type\\(s.quote.data_source\\).__module__, type\\(s.quote.data_source\\).__name__\\)\n\" 2>/dev/null | tail -1)",
+      "Bash(python -B -c \"\nfrom vnai.beam.quota import ResourceGuardian\ng = ResourceGuardian.get_instance\\(\\)\nprint\\('Plan:', g.plan_type if hasattr\\(g, 'plan_type'\\) else 'unknown'\\)\nprint\\('Limit:', g.limit if hasattr\\(g, 'limit'\\) else 'unknown'\\)\n\" 2>/dev/null)",
+      "Bash(cat > /home/ducanh/Project/stock-filter/.gitignore << 'EOF'\n__pycache__/\n*.pyc\n*.pyo\nEOF)",
+      "Bash(python -B -c \"from vnstock import change_api_key; import inspect; print\\(inspect.getfile\\(change_api_key\\)\\)\")",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(tree /home/ducanh/Project/stock-filter/backend -I '__pycache__' 2>/dev/null || find /home/ducanh/Project/stock-filter/backend -not -path '*/__pycache__/*' -not -name '__pycache__' | sort)",
+      "Bash(chmod +x /home/ducanh/Project/stock-filter/.git/hooks/pre-commit)",
+      "Bash(cat -n /home/ducanh/Project/stock-filter/backend/domain/entities/*.py)",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__click",
+      "mcp__chrome-devtools__fill",
+      "mcp__chrome-devtools__take_snapshot"
+    ]
+  }
+}
