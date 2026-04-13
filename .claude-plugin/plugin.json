@@ -1,0 +1,17 @@
+{
+  "name": "pda",
+  "description": "Plugin for personal use",
+  "version": "1.0.0",
+  "author": {
+    "name": "Phung Duc Anh",
+    "email": "phungducanh2511@gmail.com",
+    "url": "https://github.com/spaghetti-lover"
+  },
+  "repository": "https://github.com/spaghetti-lover/pda-plugin",
+  "license": "MIT",
+  "keywords": [
+    "personal",
+    "plugin",
+    "pda"
+  ]
+}

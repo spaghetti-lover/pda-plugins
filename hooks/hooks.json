@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $CLAUDE_PROJECT_DIR/.claude/hooks/notify.py 'Claude is waiting for your input!'"
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/notify.py 'Claude is waiting for your input!'"
           }
         ]
       }
@@ -15,7 +15,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $CLAUDE_PROJECT_DIR/.claude/hooks/notify.py 'Claude has finished its response!'"
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/notify.py 'Claude has finished its response!'"
           }
         ]
       }
