@@ -1,0 +1,34 @@
+{
+  "name": "pda-plugins",
+  "owner": {
+    "name": "Phung Duc Anh",
+    "email": "phungducanh2511@gmail.com"
+  },
+  "metadata": {
+    "description": "Personal Claude Code plugin by Phung Duc Anh with custom skills, commands, hooks, and agents"
+  },
+  "plugins": [
+    {
+      "name": "pda",
+      "source": {
+        "source": "github",
+        "repo": "spaghetti-lover/pda-plugins"
+      },
+      "description": "Personal development workflows — skills, commands, hooks, and agents for Claude Code",
+      "version": "1.0.0",
+      "author": {
+        "name": "Phung Duc Anh",
+        "email": "phungducanh2511@gmail.com"
+      },
+      "homepage": "https://github.com/spaghetti-lover/pda-plugins",
+      "repository": "https://github.com/spaghetti-lover/pda-plugins",
+      "keywords": [
+        "personal",
+        "plugin",
+        "pda",
+        "skills",
+        "hooks"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 allowed-tools: Read, Bash(cat:*), Bash(ls:*), Write, Edit
-description: Combine the project's existing CLAUDE.md with the pda-plugin behavioral guidelines to reduce common LLM coding mistakes
+description: Combine the project's existing CLAUDE.md with the pda-plugins behavioral guidelines to reduce common LLM coding mistakes
 ---
 
 ## Context
@@ -91,5 +91,6 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ### After merging
 
 Show the user:
+
 - Whether CLAUDE.md was created or updated
 - A brief summary of what was preserved vs added

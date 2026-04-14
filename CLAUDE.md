@@ -1,4 +1,4 @@
-# pda-plugin
+# pda-plugins
 
 Personal Claude Code plugin by Phung Duc Anh. Extends Claude Code with custom skills, commands, hooks, and scripts.
 
@@ -27,13 +27,13 @@ Skills follow the [skill conventions](docs/skill-conventions.md). Key rules:
 
 `code-review` is the orchestrator skill. It spawns 4 parallel agents, each reading its own methodology file:
 
-| Skill | Directory | Focus |
-|-------|-----------|-------|
-| code-review | `skills/code-review/` | Orchestrator — spawns agents, aggregates, verdicts |
-| reviewing-security | `skills/reviewing-security/` | OWASP, injection, auth, secrets, crypto |
-| reviewing-architecture | `skills/reviewing-architecture/` | SOLID, modularity, coupling, scalability |
-| reviewing-logic | `skills/reviewing-logic/` | Bugs, edge cases, null handling, async |
-| reviewing-performance | `skills/reviewing-performance/` | Complexity, N+1, memory, caching |
+| Skill                  | Directory                        | Focus                                              |
+| ---------------------- | -------------------------------- | -------------------------------------------------- |
+| code-review            | `skills/code-review/`            | Orchestrator — spawns agents, aggregates, verdicts |
+| reviewing-security     | `skills/reviewing-security/`     | OWASP, injection, auth, secrets, crypto            |
+| reviewing-architecture | `skills/reviewing-architecture/` | SOLID, modularity, coupling, scalability           |
+| reviewing-logic        | `skills/reviewing-logic/`        | Bugs, edge cases, null handling, async             |
+| reviewing-performance  | `skills/reviewing-performance/`  | Complexity, N+1, memory, caching                   |
 
 Agent prompts tell each agent: `Read skills/reviewing-{dimension}/SKILL.md — follow its checklist and output format exactly.`
 
@@ -82,6 +82,7 @@ Both use `scripts/notify.py`.
 ### 4. Goal-Driven Execution
 
 Transform tasks into verifiable goals:
+
 - "Add validation" → write tests for invalid inputs, then make them pass
 - "Fix the bug" → write a reproducing test, then make it pass
 - "Refactor X" → ensure tests pass before and after
