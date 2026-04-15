@@ -1,11 +1,11 @@
 ---
 name: reviewing-code
-description: Performs comprehensive code review across 4 dimensions (security, architecture, logic, performance) using parallel agents. Aggregates findings into a unified report with prioritized verdicts. Use when asked to review code, review a PR, or perform a code review.
+description: Performs comprehensive code review across 5 dimensions (security, architecture, logic, performance, readability) using parallel agents. Aggregates findings into a unified report with prioritized verdicts. Use when asked to review code, review a PR, or perform a code review.
 ---
 
 # Code Review
 
-Orchestrates 4 parallel review agents, then aggregates findings into a unified report.
+Orchestrates 5 parallel review agents, then aggregates findings into a unified report.
 
 ## 1. Determine scope
 
@@ -15,8 +15,7 @@ Orchestrates 4 parallel review agents, then aggregates findings into a unified r
 - **No scope given**: `git diff --cached` + `git diff`
 
 Collect file list and diffs to pass to each agent.
-
-## 2. Spawn 4 agents in parallel
+## 2. Spawn 5 agents in parallel
 
 Launch all simultaneously via the Agent tool. Each agent reads its methodology file first, then reviews the files.
 
@@ -27,6 +26,8 @@ Launch all simultaneously via the Agent tool. Each agent reads its methodology f
 **Agent 3 — Logic**: Read `skills/reviewing-logic/SKILL.md`, follow its checklist. End with CLEAN/NEEDS_FIXES/RISKY.
 
 **Agent 4 — Performance**: Read `skills/reviewing-performance/SKILL.md`, follow its checklist. End with FAST/ACCEPTABLE/NEEDS_OPTIMIZATION.
+
+**Agent 5 — Readability**: Read `skills/reviewing-readability/SKILL.md`, follow its checklist. End with PASS/WARN/FAIL.
 
 Each agent prompt:
 
@@ -47,7 +48,8 @@ Diff context: {diff_summary}
 2. Logic BUG/LIKELY_BUG
 3. Performance HIGH
 4. Architecture HIGH
-5. Everything else by severity
+5. Readability HIGH
+6. Everything else by severity
 
 ## 4. Report format
 
@@ -64,6 +66,7 @@ Output directly to user:
 | Architecture | assessment               | X        |
 | Logic        | CLEAN/NEEDS_FIXES/RISKY  | X        |
 | Performance  | FAST/ACCEPTABLE/NEEDS_OPT| X        |
+| Readability  | PASS/WARN/FAIL           | X        |
 
 **Overall**: APPROVE / REQUEST_CHANGES / NEEDS_DISCUSSION
 
