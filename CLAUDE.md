@@ -1,90 +1,55 @@
-# pda-plugins
+# agent-skills
 
-Personal Claude Code plugin by Phung Duc Anh. Extends Claude Code with custom skills, commands, hooks, and scripts.
+A collection of production-grade engineering skills for AI coding agents.
 
-## Project structure
+## Project Structure
 
 ```
-commands/          Slash commands (markdown files with frontmatter)
-skills/            Skills (each dir has a SKILL.md)
-hooks/             Hook definitions (hooks.json)
-scripts/           Utility scripts used by hooks/commands
-agents/            Custom agent definitions
-docs/              Reference documentation
+skills/            → Core skills (SKILL.md per directory)
+commands/          → Slash commands (markdown files with frontmatter)
+references/        → Supplementary checklists and guides (testing, performance, accessibility, skill authoring)
+hooks/             → Session lifecycle hooks (hooks.json)
+scripts/           → Utility scripts used by hooks/commands
+agents/            → Custom agent definitions
+bin/               → Executables
+output-styles/     → Output formatting templates
 ```
 
-## Skills
+## Skills by Phase
 
-Skills follow the [skill conventions](docs/skill-conventions.md). Key rules:
+**Define:** spec-driven-development, idea-refine
+**Plan:** planning-and-task-breakdown
+**Build:** incremental-implementation, test-driven-development, context-engineering, source-driven-development, frontend-ui-engineering, api-and-interface-design
+**Verify:** browser-testing-with-devtools, debugging-and-error-recovery
+**Review:** reviewing-code, reviewing-security, reviewing-architecture, reviewing-logic, reviewing-performance
+**Ship:** git-workflow-and-versioning, ci-cd-and-automation, deprecation-and-migration, documentation-and-adrs, shipping-and-launch
 
-- **Naming**: gerund form with hyphens (`reviewing-security`, not `security-review`)
-- **Frontmatter**: only `name` and `description` — no `allowed-tools` or other fields
-- **Description**: third person, includes what it does AND when to use it
-- **Conciseness**: don't explain what Claude already knows. Checklists, not paragraphs. Under 500 lines.
-- **Progressive disclosure**: SKILL.md is the overview. Put detailed reference in separate files, linked one level deep.
-
-### Code review system
-
-`code-review` is the orchestrator skill. It spawns 4 parallel agents, each reading its own methodology file:
-
-| Skill                  | Directory                        | Focus                                              |
-| ---------------------- | -------------------------------- | -------------------------------------------------- |
-| code-review            | `skills/code-review/`            | Orchestrator — spawns agents, aggregates, verdicts |
-| reviewing-security     | `skills/reviewing-security/`     | OWASP, injection, auth, secrets, crypto            |
-| reviewing-architecture | `skills/reviewing-architecture/` | SOLID, modularity, coupling, scalability           |
-| reviewing-logic        | `skills/reviewing-logic/`        | Bugs, edge cases, null handling, async             |
-| reviewing-performance  | `skills/reviewing-performance/`  | Complexity, N+1, memory, caching                   |
-
-Agent prompts tell each agent: `Read skills/reviewing-{dimension}/SKILL.md — follow its checklist and output format exactly.`
-
-Sub-skills can also be invoked independently.
+**Cross-cutting:** formatting-system-design, writing-skills, stochastic-multi-agent-consensus
 
 ## Commands
 
-- `/add-commit-push` — stage, commit, and push (no Co-Authored-By)
-- `/commit-push` — commit staged changes and push (no Co-Authored-By)
-- `/setup-claude-md` — merge behavioral guidelines into a project's CLAUDE.md (idempotent)
+- `/spec` — Write a structured specification before coding
+- `/plan` — Break work into small verifiable tasks
+- `/build` — Implement the next task incrementally
+- `/test` — Run TDD workflow; for bugs, use the Prove-It pattern
+- `/review` — Five-axis code review
+- `/code-simplify` — Simplify code without changing behavior
+- `/ship` — Pre-launch checklist for production deployment
+- `/add-commit-push` — Stage, commit, and push (no Co-Authored-By)
+- `/commit-push` — Commit staged changes and push (no Co-Authored-By)
+- `/setup-claude-md` — Merge behavioral guidelines into a project's CLAUDE.md
 
-## Hooks
+## Conventions
 
-- **Notification**: desktop notification when Claude waits for input
-- **Stop**: desktop notification when Claude finishes a response
+- Every skill lives in `skills/<name>/SKILL.md`
+- YAML frontmatter with `name` and `description` fields
+- Description starts with what the skill does (third person), followed by trigger conditions ("Use when...")
+- Every skill has: Overview, When to Use, Process, Common Rationalizations, Red Flags, Verification
+- References are in `references/`, not inside skill directories
+- Supporting files only created when content exceeds 100 lines
 
-Both use `scripts/notify.py`.
+## Boundaries
 
-## Behavioral Guidelines
-
-> Reduce common LLM coding mistakes. These bias toward caution over speed — for trivial tasks, use judgment.
-
-### 1. Think Before Coding
-
-- State assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them — don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop and ask.
-
-### 2. Simplicity First
-
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No speculative "flexibility" or "configurability".
-- No error handling for impossible scenarios.
-- If 200 lines could be 50, rewrite it.
-
-### 3. Surgical Changes
-
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style.
-- Remove imports/variables YOUR changes made unused. Don't remove pre-existing dead code unless asked.
-- Every changed line should trace to the user's request.
-
-### 4. Goal-Driven Execution
-
-Transform tasks into verifiable goals:
-
-- "Add validation" → write tests for invalid inputs, then make them pass
-- "Fix the bug" → write a reproducing test, then make it pass
-- "Refactor X" → ensure tests pass before and after
-
-For multi-step tasks, state a brief plan with verification steps.
+- Always: Follow the skill-anatomy.md format for new skills
+- Never: Add skills that are vague advice instead of actionable processes
+- Never: Duplicate content between skills — reference other skills instead
