@@ -12,7 +12,6 @@ Pick the next pending task from the plan. For each task:
 4. Implement the minimum code to pass the test (GREEN)
 5. Run the full test suite to check for regressions
 6. Run the build to verify compilation
-7. Commit with a descriptive message
-8. Mark the task complete and move to the next one
+7. Use skills:clean to clean redundant file
 
 If any step fails, follow the skills:debugging-and-error-recovery skill.
