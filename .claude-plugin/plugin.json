@@ -1,16 +1,18 @@
 {
   "name": "pda",
-  "description": "Plugin for personal use",
-  "version": "2.0.0",
+  "description": "Plugin for personal development use",
+  "version": "2.1.0",
   "author": {
     "name": "Phung Duc Anh",
     "email": "phungducanh2511@gmail.com",
     "url": "https://github.com/spaghetti-lover"
   },
-  "repository": "https://github.com/spaghetti-lover/pda-plugins",
+  "repository": "https://github.com/spaghetti-lover/pda-code-plugins",
   "keywords": [
     "personal",
     "plugin",
-    "pda"
+    "pda",
+    "development",
+    "code"
   ]
 }
