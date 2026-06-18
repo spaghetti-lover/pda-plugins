@@ -10,24 +10,53 @@
   "plugins": [
     {
       "name": "pda-code",
-      "source": {
-        "source": "github",
-        "repo": "spaghetti-lover/pda-code-plugin"
-      },
+      "source": "./pda-code-plugin",
       "description": "Personal development workflows — skills, commands, hooks, and agents for Claude Code",
       "version": "1.0.0",
-      "author": {
-        "name": "Phung Duc Anh",
-        "email": "phungducanh2511@gmail.com"
-      },
-      "homepage": "https://github.com/spaghetti-lover/pda-code-plugin",
-      "repository": "https://github.com/spaghetti-lover/pda-code-plugin",
       "keywords": [
         "personal",
         "plugin",
         "pda",
-        "skills",
-        "hooks"
+        "code",
+        "writing"
+      ]
+    },
+    {
+      "name": "pda-learn",
+      "source": "./pda-learn-plugin",
+      "description": "Plugin for personal learning development",
+      "version": "2.0.0",
+      "keywords": [
+        "personal",
+        "plugin",
+        "learn",
+        "pda"
+      ]
+    },
+    {
+      "name": "pda-teamwork",
+      "source": "./pda-teamwork-plugin",
+      "description": "Plugin for teamwork and collaboration skills, commands, hooks, and agents in Claude Code",
+      "version": "2.0.0",
+      "keywords": [
+        "personal",
+        "plugin",
+        "pda",
+        "teamwork",
+        "collaboration"
+      ]
+    },
+    {
+      "name": "pda-social",
+      "source": "./pda-social-plugin",
+      "description": "Plugin for social interaction skills, commands, hooks, and agents in Claude Code",
+      "version": "2.0.0",
+      "keywords": [
+        "personal",
+        "plugin",
+        "pda",
+        "social",
+        "interaction"
       ]
     }
   ]

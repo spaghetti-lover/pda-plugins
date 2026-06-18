@@ -1,7 +1,7 @@
 {
-  "name": "pda-social",
-  "description": "Plugin for social interaction skills, commands, hooks, and agents in Claude Code",
-  "version": "2.0.0",
+  "name": "pda-code",
+  "description": "Personal development workflows — skills, commands, hooks, and agents for Claude Code",
+  "version": "1.0.0",
   "author": {
     "name": "Phung Duc Anh",
     "email": "phungducanh2511@gmail.com",
@@ -12,7 +12,7 @@
     "personal",
     "plugin",
     "pda",
-    "social",
-    "interaction"
+    "code",
+    "writing"
   ]
 }

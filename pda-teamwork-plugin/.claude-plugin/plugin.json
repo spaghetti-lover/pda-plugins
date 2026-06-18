@@ -1,6 +1,6 @@
 {
-  "name": "pda-social",
-  "description": "Plugin for social interaction skills, commands, hooks, and agents in Claude Code",
+  "name": "pda-teamwork",
+  "description": "Plugin for teamwork and collaboration skills, commands, hooks, and agents in Claude Code",
   "version": "2.0.0",
   "author": {
     "name": "Phung Duc Anh",
@@ -12,7 +12,7 @@
     "personal",
     "plugin",
     "pda",
-    "social",
-    "interaction"
+    "teamwork",
+    "collaboration"
   ]
 }
