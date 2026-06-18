@@ -1,0 +1,19 @@
+{
+  "name": "pda-teamwork",
+  "description": "Plugin for teamwork and collaboration skills, commands, hooks, and agents in Claude Code",
+  "version": "2.0.0",
+  "author": {
+    "name": "Phung Duc Anh",
+    "email": "phungducanh2511@gmail.com",
+    "url": "https://github.com/spaghetti-lover/pda-teamwork-plugin"
+  },
+  "repository": "https://github.com/spaghetti-lover/pda-teamwork-plugin",
+  "keywords": [
+    "personal",
+    "plugin",
+    "learn",
+    "pda",
+    "teamwork",
+    "collaboration"
+  ]
+}
