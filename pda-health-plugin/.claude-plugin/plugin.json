@@ -1,7 +1,7 @@
 {
   "name": "pda-health",
   "description": "Plugin for personal health and wellness routines — skills, commands, hooks, and agents in Claude Code",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Phung Duc Anh",
     "email": "phungducanh2511@gmail.com",
