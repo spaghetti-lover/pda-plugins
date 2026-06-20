@@ -1,0 +1,18 @@
+{
+  "name": "pda-health",
+  "description": "Plugin for personal health and wellness routines — skills, commands, hooks, and agents in Claude Code",
+  "version": "1.0.0",
+  "author": {
+    "name": "Phung Duc Anh",
+    "email": "phungducanh2511@gmail.com",
+    "url": "https://github.com/spaghetti-lover"
+  },
+  "repository": "https://github.com/spaghetti-lover/pda-plugins",
+  "keywords": [
+    "personal",
+    "plugin",
+    "pda",
+    "health",
+    "wellness"
+  ]
+}

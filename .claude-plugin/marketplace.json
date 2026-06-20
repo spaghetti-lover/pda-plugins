@@ -58,6 +58,19 @@
         "social",
         "interaction"
       ]
+    },
+    {
+      "name": "pda-health",
+      "source": "./pda-health-plugin",
+      "description": "Plugin for personal health and wellness routines — skills, commands, hooks, and agents in Claude Code",
+      "version": "1.0.0",
+      "keywords": [
+        "personal",
+        "plugin",
+        "pda",
+        "health",
+        "wellness"
+      ]
     }
   ]
 }
