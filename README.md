@@ -13,6 +13,7 @@ Add this marketplace, then install the plugins you want:
 /plugin install pda-learn@pda-plugins
 /plugin install pda-teamwork@pda-plugins
 /plugin install pda-social@pda-plugins
+/plugin install pda-health@pda-plugins
 ```
 
 ## Plugins
@@ -23,6 +24,7 @@ Add this marketplace, then install the plugins you want:
 | `pda-learn`    | `pda-learn-plugin/`   | `fast-reading-coach`, `learning-misconceptions` |
 | `pda-teamwork` | `pda-teamwork-plugin/`| `counter-argument`, `feedback`                  |
 | `pda-social`   | `pda-social-plugin/`  | _(placeholder — no skills yet)_                 |
+| `pda-health`   | `pda-health-plugin/`  | `hair-care`, `skin-care`                        |
 
 ### pda-code
 - **technical-writing** — write clear technical docs following Google's developer documentation style guide.
@@ -37,6 +39,10 @@ Add this marketplace, then install the plugins you want:
 
 ### pda-social
 Reserved for social-interaction skills. No skills yet.
+
+### pda-health
+- **hair-care** — a standard hair-care routine: washing/conditioning frequency, gentle drying with heat protection, nourishing oils, and maintenance habits.
+- **skin-care** — foundational skincare (cleanse, moisturize, sunscreen) plus advanced active-ingredient treatments (BHA, AHA, retinol, niacinamide, vitamin C) for acne, dark spots, and aging.
 
 ## Structure
 
