@@ -1,7 +1,6 @@
 ---
 name: clean-code
 description: Apply Clean Code principles (meaningful names, small functions, error handling, SOLID, DRY/KISS/YAGNI, code smells) when generating or refactoring code. Use when the user wants to write clean code, refactor for readability, review code quality, or asks about naming, functions, comments, or code smells.
-disable-model-invocation: true
 ---
 
 # Clean Code Rules for AI Code Generation

@@ -1,7 +1,6 @@
 ---
 name: coding-guidelines
 description: Coding guidelines for languages used in our firm as well as the development workflow. Use when the user wants to write clean code, refactor for readability, review code quality, or asks about naming, functions, comments, or code smells.
-disable-model-invocation: true
 ---
 
 # Coding guideline
