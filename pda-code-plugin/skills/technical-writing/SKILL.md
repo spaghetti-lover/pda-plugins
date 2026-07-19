@@ -1,8 +1,7 @@
 ---
 name: technical-writing
 description: Write clear technical documentation following Google's style guide. Use when writing docs, README files, API documentation, code comments, user guides, or asking about documentation style.
-metadata:
-  mcpmarket-version: 1.0.0
+user-invocable: true
 ---
 
 # Technical Writing

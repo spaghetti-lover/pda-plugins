@@ -1,8 +1,7 @@
 ---
 name: implement-feature
 description: Implement a feature, fix, or code change while matching the codebase's existing code style and conventions (naming, formatting, patterns, helper reuse) and keeping comments minimal and consistent with the surrounding code. Use whenever the user asks to implement, build, add, write, or fix code — especially after a feature has been discussed or planned — to write code that reads like the existing codebase and to avoid over-commenting.
-metadata:
-  mcpmarket-version: 1.0.0
+user-invocable: true
 ---
 
 # Implement Feature

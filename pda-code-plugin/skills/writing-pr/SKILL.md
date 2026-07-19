@@ -1,7 +1,7 @@
 ---
 name: writing-pr
 description: Use this skill when the user wants to write, draft, or improve a Pull Request (PR) or Merge Request (MR) description. Triggers include: "write a PR", "draft MR description", "help me write a pull request", "PR description for my changes", or any request to document code changes for review. Generates structured, reviewer-friendly PR/MR descriptions following team standards.
-
+user-invocable: true
 ---
 
 Help the user write a clear, well-structured Pull Request or Merge Request description that tells a story reviewers can immediately understand.

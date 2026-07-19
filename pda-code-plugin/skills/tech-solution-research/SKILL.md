@@ -1,6 +1,7 @@
 ---
 name: tech-solution-research
 description: Use this skill before committing to a technical implementation approach — choosing a library/SDK/framework, designing an architecture, integrating an external service, or whenever an implementation starts feeling unexpectedly complex or "fighting the tool." Also trigger when the user says things like "is there a better way", "this feels too complicated", "what's the right approach for X", or describes being stuck mid-implementation. The skill forces a check of the problem space and the architecture/paradigm space BEFORE searching for tools, to avoid tunnel-visioning on the first SDK/library that came to mind and missing a fundamentally simpler approach (e.g. client-side vs server-side, library vs platform feature, custom build vs known pattern).
+user-invocable: true
 ---
 
 # Tech Solution Research
