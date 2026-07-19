@@ -1,7 +1,7 @@
 ---
 name: technical-writing
 description: Write clear technical documentation following Google's style guide. Use when writing docs, README files, API documentation, code comments, user guides, or asking about documentation style.
-user-invocable: true
+disable-model-invocation: true
 ---
 
 # Technical Writing

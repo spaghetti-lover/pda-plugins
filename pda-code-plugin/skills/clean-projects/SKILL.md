@@ -1,7 +1,7 @@
 ---
 name: clean-projects
 description: Safely clean up unused, old, or unimportant project folders by moving them to Trash (recoverable), never rm -rf. Surveys git status, last-activity, and secrets, then deletes only what's safe and asks before trashing folders that contain real .env secrets. Use when the user wants to "clean up projects", "delete old/unused folders", "free up space in Project", or similar.
-user-invocable: true
+disable-model-invocation: true
 ---
 
 # Clean Projects
