@@ -299,3 +299,188 @@ POST /api/v2/files (multipart: file, purpose=batch, endpoint=/v1/chat/completion
                estimated_prompt_tokens)
   -> 200 {id: "file-wf_<uuid>", object: "file", ...}                ok
 ```
+
+If format is "example", create a flow like this:
+```html
+<title>Extractor Worked Example</title>
+<style>
+  html,body{
+    margin:0;
+    padding:40px 20px;
+    background:#fbfaf7;
+    color:#1c2a3a;
+    font-family:"Times New Roman", Times, serif;
+    display:flex;
+    justify-content:center;
+  }
+  figure{ margin:0; max-width:1180px; }
+  svg{ display:block; max-width:100%; height:auto; }
+  svg text{ fill:#1c2a3a; font-family:"Times New Roman", Times, serif; }
+  figcaption{
+    margin-top:18px;
+    font-size:15px;
+    line-height:1.55;
+    color:#4a4033;
+  }
+  figcaption code{ font-family:"DejaVu Sans Mono", Menlo, monospace; font-size:13px; }
+  .mono{ font-family:"DejaVu Sans Mono", Menlo, monospace; }
+  .lbl{ font-style:italic; }
+  .step{ fill:#7a6a52; font-size:12px; font-weight:bold; letter-spacing:0.5px; }
+  .note{ fill:#7a6a52; font-size:12px; }
+  .edge{ font-size:12px; }
+  .win{ fill:#3d6b52; font-size:12px; font-weight:bold; }
+</style>
+
+<figure>
+<svg viewBox="0 0 1180 1520" width="1180" height="1520" role="img"
+     aria-label="One worked run of SkillExtractor.extract with concrete data. Input is four ExtractMessages about a stuck TencentDB read-only instance. Step one formats them into a transcript with past-user and past-assistant tags ending in end-of-transcript. Step two runs core.list with limit 20 and gets 37 total skills, which exceeds the limit, so step three asks the LLM for BM25 keywords and gets tencentdb read-only instance stuck rollback, then core.search returns two hits. Step four renders the relevant prefix block naming those two skills and prepends it to the transcript, giving a 6100 character prompt in mode relevant. Step five runs the tool loop: the LLM calls skill_view on the first hit, sees the rollback command is wrong, and calls skill_patch with expected_version 4, which writes version 5 into SkillCore and appends one line to the audit sink. Step six returns candidates containing that single patch entry. The final note says the skill was already saved by the tool call, so the candidate is only a receipt.">
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1c2a3a"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#3d6b52"/>
+  </marker>
+</defs>
+
+<!-- ═══════════ 1. INPUT ═══════════ -->
+<text x="40" y="34" class="step">1 · INPUT — extract({ owner, messages })</text>
+
+<rect x="40" y="46" width="470" height="124" rx="2" fill="#eef1f6" stroke="#1c2a3a" stroke-width="1.6"/>
+<text x="58" y="68" class="mono" font-size="12">user_id: "u_921"  team_id: "t_44"  agent_id: "dba-bot"</text>
+<text x="58" y="86" class="mono" font-size="12">task_id: "tk_7f21"</text>
+<text x="58" y="110" class="mono" font-size="12">messages: [</text>
+<text x="58" y="128" class="mono" font-size="12">  { role: "user",      content: "只读实例卡在 rollback…" },</text>
+<text x="58" y="146" class="mono" font-size="12">  { role: "assistant", content: "先查 slave_status…" },  … ×4</text>
+<text x="58" y="164" class="mono" font-size="12">]</text>
+
+<line x1="510" y1="108" x2="588" y2="108" stroke="#1c2a3a" stroke-width="1.6" marker-end="url(#a)"/>
+<text x="549" y="98" text-anchor="middle" class="edge">formatTranscript</text>
+
+<rect x="588" y="46" width="552" height="124" rx="2" fill="#f7f4ec" stroke="#1c2a3a" stroke-width="1.6"/>
+<text x="606" y="68" class="mono" font-size="12">&lt;&lt;past-user&gt;&gt;</text>
+<text x="606" y="86" class="mono" font-size="12">只读实例卡在 rollback…</text>
+<text x="606" y="110" class="mono" font-size="12">&lt;&lt;past-assistant&gt;&gt;</text>
+<text x="606" y="128" class="mono" font-size="12">先查 slave_status…</text>
+<text x="606" y="152" class="mono" font-size="12">&lt;&lt;end-of-transcript&gt;&gt;   ← 4 820 chars, under 8k+32k: no cut</text>
+
+<line x1="275" y1="170" x2="275" y2="212" stroke="#1c2a3a" stroke-width="1.6" marker-end="url(#a)"/>
+
+<!-- ═══════════ 2. LIST ═══════════ -->
+<text x="40" y="240" class="step">2 · PREFETCH — core.list(owner, limit: 20)</text>
+
+<rect x="40" y="252" width="470" height="96" rx="2" fill="#e4ecf5" stroke="#1c2a3a" stroke-width="1.6"/>
+<text x="58" y="276" class="mono" font-size="12">→ { items: [ …20 skills… ], total: 37 }</text>
+<text x="58" y="302" font-size="13">total 37 &gt; limit 20  →  cannot show the full inventory</text>
+<text x="58" y="322" font-size="13">→ spend one query-gen call, try <tspan class="lbl">relevant</tspan></text>
+<text x="58" y="340" class="note">(if total ≤ 20 the run would jump straight to step 4 as mode = full)</text>
+
+<line x1="510" y1="300" x2="588" y2="300" stroke="#1c2a3a" stroke-width="1.6" marker-end="url(#a)"/>
+
+<!-- ═══════════ 3. QUERY-GEN + SEARCH ═══════════ -->
+<text x="588" y="240" class="step">3 · QUERY-GEN LLM + BM25</text>
+
+<rect x="588" y="252" width="552" height="96" rx="2" fill="#e4ecf5" stroke="#1c2a3a" stroke-width="1.6"/>
+<text x="606" y="274" class="mono" font-size="12">run({ enableTools: false, maxTokens: 64 }) → "TencentDB, 只读实例, rollback!"</text>
+<text x="606" y="296" class="mono" font-size="12">sanitize → "TencentDB 只读实例 rollback"</text>
+<text x="606" y="320" class="mono" font-size="12">core.search(query, top_k: 20) → 2 hits</text>
+<text x="606" y="340" class="note">empty query or 0 hits here → fall back to the recent top-20 block</text>
+
+<line x1="864" y1="348" x2="864" y2="392" stroke="#1c2a3a" stroke-width="1.6"/>
+<line x1="864" y1="392" x2="275" y2="392" stroke="#1c2a3a" stroke-width="1.6"/>
+<line x1="275" y1="392" x2="275" y2="428" stroke="#1c2a3a" stroke-width="1.6" marker-end="url(#a)"/>
+
+<!-- ═══════════ 4. PROMPT ═══════════ -->
+<text x="40" y="456" class="step">4 · PROMPT — prefix block + transcript   (mode = relevant)</text>
+
+<rect x="40" y="468" width="1100" height="180" rx="2" fill="#f2e6c9" stroke="#1c2a3a" stroke-width="1.6"/>
+<text x="58" y="492" class="mono" font-size="12">## Skills possibly relevant to this conversation (query='TencentDB 只读实例 rollback', BM25 prefetched)</text>
+<text x="58" y="512" class="mono" font-size="12">If any of these already covers the topic, prefer `skill_update` / `skill_patch` over creating a duplicate.</text>
+<text x="58" y="536" class="mono" font-size="12">- tencentdb-readonly-stuck — 只读实例回滚卡住时的排查步骤：先看 slave_status，再看 undo…</text>
+<text x="58" y="556" class="mono" font-size="12">- tencentdb-failover-drill — 主备切换演练流程</text>
+<text x="58" y="580" class="mono" font-size="12">---</text>
+<text x="58" y="600" class="mono" font-size="12">&lt;&lt;past-user&gt;&gt; 只读实例卡在 rollback… &lt;&lt;end-of-transcript&gt;&gt;</text>
+<text x="58" y="628" font-size="13">prompt_chars ≈ 6 100  ·  a <tspan class="lbl">reason</tspan> hint from the main agent, if set, is prepended above all of this</text>
+
+<line x1="590" y1="648" x2="590" y2="692" stroke="#1c2a3a" stroke-width="1.6" marker-end="url(#a)"/>
+
+<!-- ═══════════ 5. TOOL LOOP ═══════════ -->
+<text x="40" y="720" class="step">5 · TOOL LOOP — runner.run(prompt, 6 tools, ≤16 iterations)</text>
+
+<!-- loop container -->
+<rect x="40" y="732" width="1100" height="470" rx="2" fill="#f7f4ec" stroke="#1c2a3a" stroke-width="1.6" stroke-dasharray="6 4"/>
+
+<!-- iteration 1 -->
+<rect x="64" y="758" width="420" height="104" rx="2" fill="#e4ecf5" stroke="#1c2a3a" stroke-width="1.6"/>
+<text x="82" y="780" font-size="13" font-weight="bold">iter 1 — LLM calls skill_view</text>
+<text x="82" y="802" class="mono" font-size="12">{ skill_id: "sk_8f3a2b91" }</text>
+<text x="82" y="826" class="mono" font-size="12">→ { version: 4, content: "…rollback 用</text>
+<text x="82" y="844" class="mono" font-size="12">   `kill query` …", manifest: […] }</text>
+<text x="500" y="800" class="note">read-only —</text>
+<text x="500" y="818" class="note">no sink line</text>
+
+<line x1="274" y1="862" x2="274" y2="900" stroke="#1c2a3a" stroke-width="1.6" marker-end="url(#a)"/>
+<text x="292" y="886" class="note">the doc's command is wrong; one line needs fixing</text>
+
+<!-- iteration 2 -->
+<rect x="64" y="900" width="420" height="126" rx="2" fill="#dcece2" stroke="#3d6b52" stroke-width="1.8"/>
+<text x="82" y="922" font-size="13" font-weight="bold">iter 2 — LLM calls skill_patch</text>
+<text x="82" y="944" class="mono" font-size="12">{ skill_id: "sk_8f3a2b91",</text>
+<text x="82" y="962" class="mono" font-size="12">  old_string: "kill query",</text>
+<text x="82" y="980" class="mono" font-size="12">  new_string: "kill connection",</text>
+<text x="82" y="998" class="mono" font-size="12">  expected_version: 4 }   ← optimistic lock</text>
+<text x="82" y="1018" class="mono" font-size="12">→ { ok: true, version: 5 }</text>
+
+<!-- writes to core -->
+<line x1="484" y1="940" x2="700" y2="940" stroke="#3d6b52" stroke-width="1.8" marker-end="url(#ag)"/>
+<text x="592" y="930" text-anchor="middle" class="win">writes now</text>
+
+<rect x="700" y="900" width="410" height="60" rx="2" fill="#dcece2" stroke="#3d6b52" stroke-width="1.8"/>
+<text x="905" y="924" text-anchor="middle" font-size="14"><tspan class="lbl">SkillCore</tspan> — sk_8f3a2b91 v4 → v5</text>
+<text x="905" y="946" text-anchor="middle" class="note">the durable store; the edit is committed here</text>
+
+<!-- appends to sink -->
+<line x1="484" y1="1000" x2="700" y2="1000" stroke="#3d6b52" stroke-width="1.8" marker-end="url(#ag)"/>
+<text x="592" y="990" text-anchor="middle" class="win">appends 1 line</text>
+
+<rect x="700" y="972" width="410" height="70" rx="2" fill="#f7f4ec" stroke="#3d6b52" stroke-width="1.8"/>
+<text x="905" y="994" text-anchor="middle" font-size="14"><tspan class="lbl">auditSink</tspan> []  — in-memory array</text>
+<text x="718" y="1018" class="mono" font-size="12">{ action:"patch", name:"tencentdb-readonly-stuck",</text>
+<text x="718" y="1034" class="mono" font-size="12">  skill_id:"sk_8f3a2b91", version:5 }</text>
+
+<line x1="274" y1="1026" x2="274" y2="1064" stroke="#1c2a3a" stroke-width="1.6" marker-end="url(#a)"/>
+
+<!-- iteration 3 -->
+<rect x="64" y="1064" width="420" height="82" rx="2" fill="#eef1f6" stroke="#1c2a3a" stroke-width="1.6"/>
+<text x="82" y="1086" font-size="13" font-weight="bold">iter 3 — LLM emits text, no tool call</text>
+<text x="82" y="1108" class="mono" font-size="12">"Patched the rollback command. Nothing</text>
+<text x="82" y="1126" class="mono" font-size="12"> else to save."   → loop ends</text>
+
+<text x="64" y="1180" class="note">a throw anywhere in this loop → warn log + trace success=false + rethrow; the sink keeps whatever was already written</text>
+
+<line x1="590" y1="1202" x2="590" y2="1246" stroke="#1c2a3a" stroke-width="1.6" marker-end="url(#a)"/>
+
+<!-- ═══════════ 6. RETURN ═══════════ -->
+<text x="40" y="1274" class="step">6 · RETURN</text>
+
+<rect x="40" y="1286" width="1100" height="122" rx="2" fill="#dcece2" stroke="#1c2a3a" stroke-width="1.6"/>
+<text x="58" y="1310" class="mono" font-size="12">{ candidates: [ { action:"patch", name:"tencentdb-readonly-stuck", skill_id:"sk_8f3a2b91", version:5 } ],</text>
+<text x="58" y="1330" class="mono" font-size="12">  text: "Patched the rollback command. Nothing else to save." }</text>
+<text x="58" y="1358" font-size="13">obsLogger: <tspan class="mono" font-size="12">{ task_id:"tk_7f21", dur_ms:11 240, msg_count:4, candidates:1, prompt_chars:6100, prefix_mode:"relevant" }</tspan></text>
+<text x="58" y="1382" font-size="13">metric: <tspan class="mono" font-size="12">skill.extract.candidates = 1</tspan></text>
+<text x="58" y="1400" class="note">1 candidate, 3 iterations, 2 LLM calls total (query-gen + review)</text>
+
+<text x="40" y="1450" font-size="14" font-weight="bold">The skill is already at v5 in SkillCore before extract() returns.</text>
+<text x="40" y="1472" font-size="14">The candidates array is a receipt of what the tools did — not a payload waiting to be saved.</text>
+
+</svg>
+
+<figcaption>
+One run of <code>SkillExtractor.extract</code> with real values at every hop: 37 owned skills exceed
+the limit of 20, so a 64-token query-gen call produces the BM25 query that selects the two skills
+worth showing; the review LLM reads one, patches a wrong command in it under an
+<code>expected_version</code> lock, and the write lands in <code>SkillCore</code> at the moment of
+the tool call. The returned <code>candidates</code> array is the audit-sink log of that write.
+</figcaption>
+</figure>
+```
